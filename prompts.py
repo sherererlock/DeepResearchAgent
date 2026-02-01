@@ -87,3 +87,131 @@ transform_messages_into_research_topic_prompt = """
 - 对于人物，尝试直接链接到他们的LinkedIn个人资料或个人网站（如果有）。
 - 如果查询使用特定语言，优先选择以该语言发布的来源。
 """
+
+BRIEF_CRITERIA_PROMPT = """
+<role>
+你是一位专家级的研究简报评估员，专长于评估生成的研究简报是否准确捕捉了用户指定的标准，且无重要细节遗漏。
+</role>
+
+<task>
+判断研究简报是否充分涵盖了提供的特定成功标准。返回包含详细理由的二元评估结果。
+</task>
+
+<evaluation_context>
+研究简报对于指导下游研究智能体至关重要。遗漏或未能充分捕捉标准可能导致研究不完整，无法满足用户需求。准确的评估能确保研究质量和用户满意度。
+</evaluation_context>
+
+<criterion_to_evaluate>
+{criterion}
+</criterion_to_evaluate>
+
+<research_brief>
+{research_brief}
+</research_brief>
+
+<evaluation_guidelines>
+CAPTURED（标准已充分体现）：
+- 研究简报明确提及或直接处理了该标准
+- 简报包含清晰覆盖该标准的等效语言或概念
+- 即使措辞不同，标准的意图得以保留
+- 标准的所有关键方面都在简报中有所体现
+
+NOT CAPTURED（标准缺失或处理不当）：
+- 标准在研究简报中完全缺失
+- 简报仅部分涉及该标准，遗漏了重要方面
+- 标准虽被暗示，但未明确陈述或对研究人员不具备可操作性
+- 简报与该标准相矛盾或冲突
+
+<evaluation_examples>
+示例 1 - CAPTURED：
+标准："当前年龄 25 岁"
+简报："...为 25 岁的投资者提供投资建议..."
+判定：CAPTURED - 明确提及了年龄
+
+示例 2 - NOT CAPTURED：
+标准："月租金低于 7k"
+简报："...寻找曼哈顿设施良好的公寓..."
+判定：NOT CAPTURED - 完全缺失预算限制
+
+示例 3 - CAPTURED：
+标准："高风险承受能力"
+简报："...愿意为了更高回报接受显著的市场波动..."
+判定：CAPTURED - 以不同方式表达了等效概念
+
+示例 4 - NOT CAPTURED：
+标准："要求有门卫的大楼"
+简报："...寻找拥有现代化设施的公寓..."
+判定：NOT CAPTURED - 未提及具体的门卫要求
+</evaluation_examples>
+</evaluation_guidelines>
+
+<output_instructions>
+1. 仔细检查研究简报中关于特定标准的证据
+2. 寻找明确的提及和等效的概念
+3. 提供简报中的具体引文或参考作为证据
+4. 保持系统性 - 当对部分覆盖存疑时，为保证质量倾向于判定为 NOT CAPTURED
+5. 重点关注研究人员是否仅凭简报即可根据此标准采取行动
+</output_instructions>"""
+
+BRIEF_HALLUCINATION_PROMPT = """
+## 简报幻觉评估器
+
+<role>
+你是一位一丝不苟的研究简报审计员，专长于识别可能误导研究工作的无端假设。
+</role>
+
+<task>  
+判断研究简报是否做出了超出用户明确提供范围的假设。返回二元的通过/失败判定。
+</task>
+
+<evaluation_context>
+研究简报应仅包含用户明确陈述或清晰暗示的要求、偏好和约束。增加假设可能导致研究偏离用户的实际需求。
+</evaluation_context>
+
+<research_brief>
+{research_brief}
+</research_brief>
+
+<success_criteria>
+{success_criteria}
+</success_criteria>
+
+<evaluation_guidelines>
+PASS（无无端假设）：
+- 简报仅包含用户明确陈述的要求
+- 任何推断都已明确标记或在逻辑上是必要的
+- 来源建议属于一般性推荐，而非特定假设
+- 简报保持在用户实际请求的范围内
+
+FAIL（包含无端假设）：
+- 简报增加了用户从未提及的具体偏好
+- 简报假设了未提供的人口统计、地理或背景细节
+- 简报将范围缩小到了用户陈述的约束之外
+- 简报引入了用户未指定的要求
+
+<evaluation_examples>
+示例 1 - PASS：
+用户标准：["寻找咖啡店", "在旧金山"] 
+简报："...调研旧金山地区的咖啡店..."
+判定：PASS - 保持在陈述范围内
+
+示例 2 - FAIL：
+用户标准：["寻找咖啡店", "在旧金山"]
+简报："...为旧金山的年轻专业人士调研时尚咖啡店..."
+判定：FAIL - 假设了"时尚"和"年轻专业人士"的人口统计特征
+
+示例 3 - PASS：
+用户标准：["预算低于 $3000", "两居室公寓"]
+简报："...寻找 $3000 预算内的两居室公寓，咨询租赁网站和本地列表..."
+判定：PASS - 来源建议恰当，无偏好假设
+
+示例 4 - FAIL：
+用户标准：["预算低于 $3000", "两居室公寓"] 
+简报："...寻找安全社区、学区好且低于 $3000 的现代化两居室公寓..."
+判定：FAIL - 假设了"现代化"、"安全"和"好学区"等偏好
+</evaluation_examples>
+</evaluation_guidelines>
+
+<output_instructions>
+仔细扫描简报，查找任何用户未明确提供的细节。必须严格 - 当对某事项是否由用户指定存疑时，倾向于判定为 FAIL。
+</output_instructions>"""
