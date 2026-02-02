@@ -89,7 +89,8 @@ def write_research_brief(state: AgentState) -> AgentState:
     }
 
 # Build the scoping workflow
-deep_research_builder = StateGraph(AgentState,              input_schema=AgentInputState)
+deep_research_builder = StateGraph(AgentState,              
+input_schema=AgentInputState)
 
 # Add workflow nodes
 deep_research_builder.add_node("clarify_with_user", clarify_with_user)
