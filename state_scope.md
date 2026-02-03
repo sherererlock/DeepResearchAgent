@@ -2,11 +2,11 @@
 ## 数据类
 
 ### State类
+
 AgentInputState:
 保存meesages数据
 
 AgentState:
-
 research_brief: 研究简要报告
 supervisor_messages: 与监督智能体交换的消息
 raw_notes: 原始研究笔记
