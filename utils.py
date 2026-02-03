@@ -4,7 +4,7 @@ This module provides search and content processing utilities for the research ag
 including web search capabilities and content summarization tools.
 """
 
-
+import os
 from pathlib import Path
 from datetime import datetime
 from typing_extensions import Annotated, List, Literal
@@ -22,7 +22,7 @@ from prompts import summarize_webpage_prompt
 
 def get_today_str() -> str:
     """Get current date in a human-readable format."""
-    return datetime.now().strftime("%a %b %-d, %Y")
+    return datetime.now().strftime("%a %b %d, %Y")
 
 def get_current_dir() -> Path:
     """Get the current directory of the module.
@@ -218,7 +218,7 @@ def tavily_search(
     # Format output for consumption
     return format_search_output(summarized_results)
 
-@tool(parse_docstring=True)
+@tool
 def think_tool(reflection: str) -> str:
     """Tool for strategic reflection on research progress and decision-making.
     
