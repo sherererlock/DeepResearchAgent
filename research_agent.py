@@ -14,6 +14,7 @@ from langchain_openai import ChatOpenAI
 from state_research import ResearcherState, ResearcherOutputState
 from utils import tavily_search, get_today_str, think_tool
 from prompts import research_agent_prompt, compress_research_system_prompt, compress_research_human_message
+import os
 
 # ===== CONFIGURATION =====
 
