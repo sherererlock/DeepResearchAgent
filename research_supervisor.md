@@ -49,5 +49,30 @@
 ### ResearchComplete
 这是一个类，被标记为了工具
 
+## Multi-Agent
 
+### 节点supervisor
 
+分析研究任务和当前进展
+- 需要研究哪些主题
+- 是否需要并行研究
+- 研究在什么情况下完成
+
+### 节点supervisor_tools
+- 调用think_tool进行策略反思
+- 发起不同研究主题的并行研究
+- 综合研究数据
+- 决定研究是否完成
+
+### 图的逻辑
+
+1. 用户发送研究简报
+2. 节点supervisor分析研究任务和当前进展
+3. 节点supervisor_tools根据分析结果进行决策
+4. 如果需要并行研究，节点supervisor_tools发起不同研究主题的并行研究
+5. 多个research_agent并行研究
+6. 收集所有研究数据
+7. 调用think_tool进行综合反思
+8. 如果研究完成，节点supervisor_tools调用ResearchComplete工具
+9. 如果研究未完成，节点supervisor_tools根据反思结果调整研究策略
+10. 重复步骤2-9，直到研究完成
