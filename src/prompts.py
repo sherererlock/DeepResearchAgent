@@ -49,9 +49,9 @@ transform_messages_into_research_topic_prompt = """
 你的任务是将这些消息转换为更详细、更具体的研究问题，用于指导研究过程。
 
 你与用户之间已交换的消息记录如下：
-<消息记录>
+<Messages>
 {messages}
-</消息记录>
+</Messages>
 
 当前日期为 {date}。
 

@@ -220,27 +220,27 @@ def tavily_search(
 
 @tool
 def think_tool(reflection: str) -> str:
-    """Tool for strategic reflection on research progress and decision-making.
+    """用于对研究进程与决策制定进行战略性思考的工具。
     
-    Use this tool after each search to analyze results and plan next steps systematically.
-    This creates a deliberate pause in the research workflow for quality decision-making.
+    请在每次搜索后使用此工具，以系统地分析结果并规划后续步骤。
+    此举旨在研究流程中通过审慎的停顿，确保决策质量。
     
-    When to use:
-    - After receiving search results: What key information did I find?
-    - Before deciding next steps: Do I have enough to answer comprehensively?
-    - When assessing research gaps: What specific information am I still missing?
-    - Before concluding research: Can I provide a complete answer now?
+    适用场景：
+    - 收到搜索结果后：我发现了哪些关键信息？
+    - 决定下一步之前：现有信息是否足以支持全面的回答？
+    - 评估研究缺口时：我还缺少哪些具体信息？
+    - 结束研究之前：我现在能否提供完整的答案？
     
-    Reflection should address:
-    1. Analysis of current findings - What concrete information have I gathered?
-    2. Gap assessment - What crucial information is still missing?
-    3. Quality evaluation - Do I have sufficient evidence/examples for a good answer?
-    4. Strategic decision - Should I continue searching or provide my answer?
+    思考内容应包含：
+    1. 现有发现分析 - 我已收集到哪些确凿信息？
+    2. 缺口评估 - 尚缺哪些关键信息？
+    3. 质量评估 - 是否拥有充分的证据或案例以支持优质回答？
+    4. 战略决策 - 是继续搜索还是直接作答？
     
     Args:
-        reflection: Your detailed reflection on research progress, findings, gaps, and next steps
+        reflection: 关于研究进展、现有发现、信息缺口及后续步骤的详细思考
         
     Returns:
-        Confirmation that reflection was recorded for decision-making
+        确认思考已记录，以供决策参考
     """
     return f"Reflection recorded: {reflection}"
