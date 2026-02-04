@@ -11,7 +11,7 @@ The system orchestrates the complete research workflow from initial user
 input through final report delivery.
 """
 
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, AIMessage
 from langgraph.graph import StateGraph, START, END
 
 from utils import get_today_str
@@ -55,7 +55,7 @@ async def final_report_generation(state: AgentState):
     
     return {
         "final_report": final_report.content, 
-        "messages": ["Here is the final report: " + final_report.content],
+        "messages": [AIMessage(content="Here is the final report: " + final_report.content)],
     }
 
 # ===== GRAPH CONSTRUCTION =====

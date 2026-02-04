@@ -22,13 +22,13 @@ async def test_full_agent():
     format_messages([initial_message])
     
     async for output in agent.astream(
-        {"researcher_messages": [initial_message]}, 
+        {"messages": [initial_message]}, 
         stream_mode="updates"
     ):
         for node_name, node_content in output.items():
             # console.print(f"[bold blue]Step: {node_name}[/bold blue]")
-            if "researcher_messages" in node_content:
-                format_messages(node_content["researcher_messages"])
+            if "messages" in node_content:
+                format_messages(node_content["messages"])
             
             if "compressed_research" in node_content:
                 console.print(Panel(node_content["compressed_research"], title="📊 Final Research Report", border_style="magenta"))

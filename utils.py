@@ -91,7 +91,7 @@ def summarize_webpage_content(webpage_content: str) -> str:
     """
     try:
         # Set up structured output model for summarization
-        structured_model = summarization_model.with_structured_output(Summary)
+        structured_model = summarization_model.with_structured_output(Summary, method="json_mode")
         
         # Generate summary
         summary = structured_model.invoke([

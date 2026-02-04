@@ -74,7 +74,7 @@ def write_research_brief(state: AgentState) -> AgentState:
     and contains all necessary details for effective research.
     """
 
-    structured_output_model = model.with_structured_output(ResearchQuestion)
+    structured_output_model = model.with_structured_output(ResearchQuestion, method="json_mode")
 
     response = structured_output_model.invoke([
         HumanMessage(content=transform_messages_into_research_topic_prompt.format(
