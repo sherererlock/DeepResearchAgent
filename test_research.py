@@ -1,6 +1,6 @@
-from utils import format_messages
+from .src.utils import format_messages
 from langchain_core.messages import HumanMessage
-from research_agent import researcher_agent
+from .src.research_agent import researcher_agent
 
 # Example brief
 research_brief = """I want to identify and evaluate the coffee shops in San Francisco that are considered the best based specifically  

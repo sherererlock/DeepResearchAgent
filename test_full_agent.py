@@ -1,6 +1,6 @@
 from tool_utils import format_messages
 from langchain_core.messages import HumanMessage
-from full_agent import agent
+from .src.full_agent import agent
 import asyncio
 
 from rich.console import Console

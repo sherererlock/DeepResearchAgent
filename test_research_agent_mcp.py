@@ -9,7 +9,7 @@ console = Console()
 from dotenv import load_dotenv
 load_dotenv()
 
-import research_agent_mcp
+from .src.research_agent_mcp import research_agent_mcp
 from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage, filter_messages
 
 from langchain_core.messages import HumanMessage

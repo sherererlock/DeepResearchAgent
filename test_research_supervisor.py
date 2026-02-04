@@ -1,6 +1,6 @@
 from tool_utils import format_messages
 from langchain_core.messages import HumanMessage
-from research_supervisor import supervisor_agent
+from .src.research_supervisor import supervisor_agent
 import asyncio
 
 research_brief = """I want to identify and evaluate the coffee shops in San Francisco that are considered the best based specifically  

@@ -6,7 +6,7 @@ from langchain_core.messages import HumanMessage
 thread = {"configurable": {"thread_id": "1"}}
 
 
-from research_agent_scope import scope_research
+from .src.research_agent_scope import scope_research
 
 result = scope_research.invoke(
     {"messages": [HumanMessage(content="我想要研究汽车")]}, 
