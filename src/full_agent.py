@@ -14,6 +14,10 @@ input through final report delivery.
 from langchain_core.messages import HumanMessage, AIMessage
 from langgraph.graph import StateGraph, START, END
 
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from utils import get_today_str
 from prompts import final_report_generation_prompt
 from state_scope import AgentState, AgentInputState
@@ -26,7 +30,7 @@ from langchain_openai import ChatOpenAI
 import os
 
 writer_model = ChatOpenAI(
-    model="deepseek-v3.2", 
+    model="deepseek-v3.1", 
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     api_key=os.getenv("DASHSCOPE_API_KEY"), 
     temperature=0.0)

@@ -23,7 +23,7 @@ tools = [tavily_search, think_tool]
 tools_by_name = {tool.name: tool for tool in tools}
 
 model = ChatOpenAI(
-    model="deepseek-v3.2", 
+    model="deepseek-v3.1", 
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     api_key=os.getenv("DASHSCOPE_API_KEY"), 
     temperature=0.0)
@@ -32,13 +32,13 @@ model = ChatOpenAI(
 model_with_tools = model.bind_tools(tools)
 
 summarization_model = ChatOpenAI(
-    model="deepseek-v3.2", 
+    model="deepseek-v3.1", 
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     api_key=os.getenv("DASHSCOPE_API_KEY"), 
     temperature=0.0)
 
 compress_model = ChatOpenAI(
-    model="deepseek-v3.2", 
+    model="deepseek-v3.1", 
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     api_key=os.getenv("DASHSCOPE_API_KEY"), 
     temperature=0.0)
@@ -75,6 +75,9 @@ def tool_node(state: ResearcherState):
     observations = []
     for tool_call in tool_calls:
         tool = tools_by_name[tool_call["name"]]
+        if tool_call["name"] == "think_tool":
+            print(f"Researcher Thinking: {tool_call['args']}")
+
         observations.append(tool.invoke(tool_call["args"]))
             
     # Create tool message outputs

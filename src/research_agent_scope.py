@@ -31,7 +31,7 @@ def get_today_str() -> str:
 
 
 model = ChatOpenAI(
-    model="deepseek-v3.2", 
+    model="deepseek-v3.1", 
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     api_key=os.getenv("DASHSCOPE_API_KEY"), 
     temperature=0.0)

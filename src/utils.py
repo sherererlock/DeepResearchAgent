@@ -7,6 +7,7 @@ including web search capabilities and content summarization tools.
 import os
 from pathlib import Path
 from datetime import datetime
+import traceback
 from typing_extensions import Annotated, List, Literal
 
 from langchain_openai import ChatOpenAI
@@ -17,7 +18,7 @@ from tavily import TavilyClient
 
 from state_research import Summary
 from prompts import summarize_webpage_prompt
-
+import traceback
 # ===== UTILITY FUNCTIONS =====
 
 def get_today_str() -> str:
@@ -40,7 +41,7 @@ def get_current_dir() -> Path:
 # ===== CONFIGURATION =====
 
 summarization_model = ChatOpenAI(
-    model="deepseek-v3.2", 
+    model="deepseek-v3.1", 
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     api_key=os.getenv("DASHSCOPE_API_KEY"), 
     temperature=0.0)
@@ -243,4 +244,5 @@ def think_tool(reflection: str) -> str:
     Returns:
         确认思考已记录，以供决策参考
     """
+
     return f"Reflection recorded: {reflection}"

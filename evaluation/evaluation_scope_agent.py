@@ -106,7 +106,7 @@ def evaluate_success_criteria(outputs: dict, reference_outputs: dict):
     success_criteria = reference_outputs["criteria"]
 
     model = ChatOpenAI(    
-        model="deepseek-v3.2", 
+        model="deepseek-v3.1", 
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
         api_key=os.getenv("DASHSCOPE_API_KEY"), 
         temperature=0.0
@@ -188,7 +188,7 @@ def evaluate_no_assumptions(outputs: dict, reference_outputs: dict):
     success_criteria = reference_outputs["criteria"]
     
     model = ChatOpenAI(    
-        model="deepseek-v3.2", 
+        model="deepseek-v3.1", 
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
         api_key=os.getenv("DASHSCOPE_API_KEY"), 
         temperature=0.0

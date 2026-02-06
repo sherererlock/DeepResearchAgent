@@ -56,7 +56,7 @@ def get_notes_from_tool_calls(messages: list[BaseMessage]) -> list[str]:
 
 supervisor_tools = [ConductResearch, ResearchComplete, think_tool]
 supervisor_model = ChatOpenAI(
-    model="deepseek-v3.2", 
+    model="deepseek-v3.1", 
     base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
     api_key=os.getenv("DASHSCOPE_API_KEY"), 
     temperature=0.0)
@@ -161,6 +161,7 @@ async def supervisor_tools(state: SupervisorState) -> Command[Literal["superviso
 
             # Handle think_tool calls (synchronous)
             for tool_call in think_tool_calls:
+                # Record thinking process
                 observation = think_tool.invoke(tool_call["args"])
                 tool_messages.append(
                     ToolMessage(
